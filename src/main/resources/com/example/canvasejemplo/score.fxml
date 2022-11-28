@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="290.0" prefWidth="592.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.canvasejemplo.ScoreController">
+    <children>
+        <ImageView fx:id="fondo" fitHeight="298.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true" />
+        <Button fx:id="backBttn" layoutX="450.0" layoutY="233.0" mnemonicParsing="false" onAction="#onBackClick" text="Volver" />
+        <TableView fx:id="table" layoutX="200.0" layoutY="59.0" prefHeight="200.0" prefWidth="200.0">
+            <columns>
+                <TableColumn fx:id="nameCol" prefWidth="75.0" text="Nombre" />
+                <TableColumn fx:id="winCol" prefWidth="75.0" text="Victorias" />
+            </columns>
+        </TableView>
+    </children>
+</AnchorPane>

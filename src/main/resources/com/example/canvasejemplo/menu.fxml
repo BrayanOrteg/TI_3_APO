@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="585.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.canvasejemplo.MenuController">
+    <children>
+        <ImageView fx:id="fondo" fitHeight="307.0" fitWidth="591.0" layoutX="-1.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" />
+        <Label fx:id="title" layoutX="160.0" layoutY="17.0" prefHeight="54.0" prefWidth="276.0" text="Tank Battle" textAlignment="CENTER">
+            <font>
+                <Font name="Rockwell Extra Bold" size="36.0" />
+            </font>
+            <textFill>
+                <RadialGradient centerX="0.5" centerY="0.5" focusDistance="-0.09174311926605505" radius="0.9678899213808392">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.8999999761581421" green="1.0" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.8105263113975525" green="0.46530213952064514" blue="0.46530213952064514" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </RadialGradient>
+            </textFill>
+            <cursor>
+                <Cursor fx:constant="DEFAULT" />
+            </cursor>
+            <effect>
+                <DropShadow blurType="TWO_PASS_BOX" />
+            </effect>
+        </Label>
+        <Button fx:id="bttn1" layoutX="96.0" layoutY="242.0" mnemonicParsing="false" onAction="#onGameClick" prefHeight="26.0" prefWidth="122.0" text="Nueva Partida" textFill="WHITE" />
+        <Button fx:id="bttn2" layoutX="346.0" layoutY="242.0" mnemonicParsing="false" onAction="#onScoreClick" prefHeight="26.0" prefWidth="112.0" text="Puntuación" textFill="WHITE" />
+    </children>
+</AnchorPane>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="290.0" prefWidth="592.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.canvasejemplo.newGameController">
+    <children>
+        <ImageView fx:id="fondo" fitHeight="298.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true" />
+        <Button fx:id="newBttn" layoutX="450.0" layoutY="233.0" mnemonicParsing="false" onAction="#onNewGameClick" text="New Game" textFill="WHITE" />
+        <Label layoutX="260.0" layoutY="42.0" prefHeight="22.0" prefWidth="83.0" text="Jugador 1" textFill="WHITE">
+            <font>
+                <Font name="Franklin Gothic Demi Cond" size="18.0" />
+            </font></Label>
+        <TextField fx:id="jp1" layoutX="241.0" layoutY="73.0" prefHeight="26.0" prefWidth="102.0" />
+        <TextField fx:id="jp2" layoutX="239.0" layoutY="157.0" prefHeight="26.0" prefWidth="110.0" />
+        <Label layoutX="259.0" layoutY="116.0" prefHeight="34.0" prefWidth="102.0" text="Jugador 2" textFill="WHITE">
+            <font>
+                <Font name="Franklin Gothic Demi Cond" size="18.0" />
+            </font>
+        </Label>
+    </children>
+</AnchorPane>
