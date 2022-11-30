@@ -21,20 +21,24 @@ public class Avatar extends Thread {
 
     private double auxiliar_X=0,auxiliar_Y=0;
 
-    private Rectangle shape;
+    private Rectangle shape , shapeShot;
 
-    public Avatar(Canvas canvas){
+
+
+    public int life=4;
+
+    public Avatar(Canvas canvas, int positionX, int positionY){
         this.canvas = canvas;
 
         gc = canvas.getGraphicsContext2D();
 
         String uri = "file:"+HelloApplication.class.getResource("tank.png").getPath();
         tank = new Image(uri);
-        pos = new Vector(100,100);
+        pos = new Vector(positionX,positionY);
 
-        shape=new Rectangle(100,100,50,50);
+        shape=new Rectangle(100,100,48,48);
 
-
+        shapeShot=new Rectangle(100,100, 10, 10);
 
         posShot = new Vector(100,100);
         direction = new Vector(2,2);
@@ -44,14 +48,26 @@ public class Avatar extends Thread {
         gc.save();
         gc.translate(pos.x, pos.y);
         gc.rotate(90+direction.getAngle());
-        shape.setX(pos.x);
-        shape.setY(pos.y);
+        shape.setX(pos.x-25);
+        shape.setY(pos.y-20);
 
         gc.drawImage(tank, -25,-25, 50,50);
-        shape.setX(pos.x);
-        shape.setY(pos.y);
+
 
         gc.restore();
+    }
+
+    public void drawShotTank(){
+        gc.save();
+        gc.translate(pos.x, pos.y);
+        gc.rotate(90+direction.getAngle());
+        gc.fillRect(-25,-25,50,50);
+        gc.setFill(Color.WHITE);
+
+
+        gc.restore();
+
+
     }
     public void setPosition(double x, double y) {
         pos.x = (int) x - 25;
@@ -99,6 +115,10 @@ public class Avatar extends Thread {
     public void moveForwardShot(){
         posShot.x += auxiliar_X;
         posShot.y += auxiliar_Y;
+
+        shapeShot.setX(posShot.x);
+        shapeShot.setY(posShot.y);
+
     }
 
     public double getShotPosition_X(){
@@ -121,5 +141,18 @@ public class Avatar extends Thread {
 
     public Rectangle getShape(){return  shape;}
 
+    public Rectangle getShotShape(){return shapeShot;}
+
+    public int getLife() {
+        return life;
+    }
+
+    public void setLife() {
+        life--;
+    }
+
+    public Vector getDirection() {
+        return direction;
+    }
 }
 

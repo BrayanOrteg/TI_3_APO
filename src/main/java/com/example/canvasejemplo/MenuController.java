@@ -47,8 +47,6 @@ public class MenuController implements Initializable {
         Image i = new Image((uri));
         fondo.setImage(i);
 
-        //D:\Escritorio\7e9ada31c15afa1f2fd026d36c9bffd2.gif
-
         bttn1.setStyle("-fx-padding: 8 15 15 15;\n" +
                 "    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;\n" +
                 "    -fx-background-radius: 8;\n" +

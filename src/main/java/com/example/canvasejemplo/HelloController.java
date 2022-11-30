@@ -1,6 +1,7 @@
 package com.example.canvasejemplo;
 
 import com.example.canvasejemplo.model.Avatar;
+import com.example.canvasejemplo.model.Walls;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -10,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.TableRow;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -24,6 +26,8 @@ public class HelloController implements Initializable {
     @FXML
     private Canvas canvas;
 
+    private Image img;
+
 
     private GraphicsContext gc;
     private boolean isRunning = true;
@@ -31,6 +35,8 @@ public class HelloController implements Initializable {
 
     //Elementos gráficos
     private Avatar avatar,avatar2;
+
+    private Walls wall_1, wall_left_1 , wall_left_2, wall_right_1, wall_right_2;
 
 
     //Estados de las teclas
@@ -50,9 +56,9 @@ public class HelloController implements Initializable {
     boolean shot_2_InProgress= false;
     boolean shot_1_InProgress= false;
 
-    boolean shot_1_hit=false;
+    boolean w_Wall = false , s_Wall= false , up_Wall=false, down_Wall=false;
 
-    boolean shot_2_hit=false;
+
 
 
 
@@ -61,16 +67,27 @@ public class HelloController implements Initializable {
         gc = canvas.getGraphicsContext2D();
         canvas.setFocusTraversable(true);
 
-
+        String uri="file:"+HelloApplication.class.getResource("gameTablero.png").getPath();
+        img=new Image(uri);
 
 
         canvas.setOnMouseClicked(this::onMouseClicked);
         canvas.setOnKeyPressed(this::onKeyPressed);
         canvas.setOnKeyReleased(this::onKeyReleased);
 
-        avatar = new Avatar(canvas);
 
-        avatar2= new Avatar(canvas);
+        wall_1= new Walls(canvas,290,190,130,100);
+
+        wall_left_1= new Walls(canvas, 85,70,70,120);
+        wall_left_2=new Walls(canvas,85,290,70,120);
+
+        wall_right_1= new Walls(canvas, 550,70,70,120);
+        wall_right_2=new Walls(canvas,550,290,70,120);
+
+        avatar = new Avatar(canvas,100,100);
+
+
+        avatar2= new Avatar(canvas,500,350);
         draw();
 
     }
@@ -151,39 +168,137 @@ public class HelloController implements Initializable {
                 ()->{
                     while(isRunning){
                         //Dibujo
-                        Platform.runLater(()->{
-                            gc.setFill(Color.BLACK);
+                        Platform.runLater(()-> {
 
-                            gc.fillRect(0,0, canvas.getWidth(), canvas.getHeight());
+                            gc.drawImage(img, 0, 0, canvas.getWidth(), canvas.getHeight());
 
+                            wall_1.drawWall();
+                            wall_left_1.drawWall();
+                            wall_left_2.drawWall();
+                            wall_right_1.drawWall();
+                            wall_right_2.drawWall();
                             avatar.draw();
 
                             avatar2.draw();
 
-                            if(Wpressed){
-                                avatar.moveForward();
-                            }
-                            if(Apressed){
-                                avatar.changeAngle(-4);
-                            }
-                            if(Spressed){
-                                avatar.moveBackward();
 
+
+
+                            if(avatar.getLife()>0) {
+
+                                if (Wpressed && avatar.getTankPosition_Y() + 30 + avatar.getDirection().y <= canvas.getHeight() && avatar.getTankPosition_Y() - 30 + avatar.getDirection().y >= 0
+                                        && avatar.getTankPosition_X() + 30 + avatar.getDirection().x <= canvas.getWidth() && avatar.getTankPosition_X() - 30 + avatar.getDirection().x >= 0
+                                && !s_Wall) {
+
+                                    if(avatar.getShape().intersects(wall_1.getWallShape().getBoundsInParent())
+                                    || avatar.getShape().intersects(wall_left_1.getWallShape().getBoundsInParent())
+                                    ||avatar.getShape().intersects(wall_left_2.getWallShape().getBoundsInParent())
+                                            || avatar.getShape().intersects(wall_right_1.getWallShape().getBoundsInParent())
+                                            ||avatar.getShape().intersects(wall_right_2.getWallShape().getBoundsInParent())){
+
+                                        w_Wall=true;
+                                        avatar.moveBackward();
+                                        avatar.moveBackward();
+                                        avatar.moveBackward();
+                                        avatar.moveBackward();
+
+                                    }else {
+                                        w_Wall=false;
+                                    }
+
+                                        avatar.moveForward();
+
+
+                                }
+                                if (Apressed) {
+                                    avatar.changeAngle(-4);
+                                }
+                                if (Spressed && avatar.getTankPosition_Y() - 30 - avatar.getDirection().y <= canvas.getHeight() && avatar.getTankPosition_Y() - 30 - avatar.getDirection().y >= 0
+                                        && avatar.getTankPosition_X() - 30 - avatar.getDirection().x <= canvas.getWidth() && avatar.getTankPosition_X() - 30 - avatar.getDirection().x >= 0
+                                && !w_Wall) {
+
+                                    if(avatar.getShape().intersects(wall_1.getWallShape().getBoundsInParent())
+                                            || avatar.getShape().intersects(wall_left_1.getWallShape().getBoundsInParent())
+                                            ||avatar.getShape().intersects(wall_left_2.getWallShape().getBoundsInParent())
+                                            || avatar.getShape().intersects(wall_right_1.getWallShape().getBoundsInParent())
+                                            ||avatar.getShape().intersects(wall_right_2.getWallShape().getBoundsInParent())){
+
+                                        s_Wall=true;
+                                        avatar.moveForward();
+                                        avatar.moveForward();
+                                        avatar.moveForward();
+                                        avatar.moveForward();
+
+                                    }else {
+                                        s_Wall=false;
+                                    }
+
+
+                                        avatar.moveBackward();
+
+
+                                }
+                                if (Dpressed) {
+                                    avatar.changeAngle(4);
+                                }
+
+                                if(Fpressed){
+                                    if(!shot_1_InProgress){
+                                        shotDraw_1();
+                                    }else {
+                                        System.out.println("Disparo 1 en progreso");
+                                    }
+                                }
                             }
-                            if(Dpressed){
-                                avatar.changeAngle(4);
-                            }
-                            if(UPpressed){
+
+                        if(avatar2.getLife()>0){
+                            if (UPpressed && avatar2.getTankPosition_Y() + 30 + avatar2.getDirection().y <= canvas.getHeight() && avatar2.getTankPosition_Y() - 30 + avatar2.getDirection().y >= 0
+                                    && avatar2.getTankPosition_X() + 30 + avatar2.getDirection().x <= canvas.getWidth() && avatar2.getTankPosition_X() - 30 + avatar2.getDirection().x >= 0
+                                    && !down_Wall) {
+
+                                if(avatar2.getShape().intersects(wall_1.getWallShape().getBoundsInParent())
+                                        || avatar2.getShape().intersects(wall_left_1.getWallShape().getBoundsInParent())
+                                        ||avatar2.getShape().intersects(wall_left_2.getWallShape().getBoundsInParent())
+                                        || avatar2.getShape().intersects(wall_right_1.getWallShape().getBoundsInParent())
+                                        ||avatar2.getShape().intersects(wall_right_2.getWallShape().getBoundsInParent())){
+
+                                    up_Wall=true;
+                                    avatar2.moveBackward();
+                                    avatar2.moveBackward();
+                                    avatar2.moveBackward();
+                                    avatar2.moveBackward();
+
+                                }else {
+                                    up_Wall=false;
+                                }
                                 avatar2.moveForward();
                             }
-                            if(LEFTpressed){
+                            if (LEFTpressed) {
                                 avatar2.changeAngle(-4);
                             }
-                            if(DOWNpressed){
+                            if (DOWNpressed && avatar2.getTankPosition_Y() - 30 - avatar2.getDirection().y <= canvas.getHeight() && avatar2.getTankPosition_Y() - 30 - avatar2.getDirection().y >= 0
+                                    && avatar2.getTankPosition_X() - 30 - avatar2.getDirection().x <= canvas.getWidth() && avatar2.getTankPosition_X() - 30 - avatar2.getDirection().x >= 0
+                            && !up_Wall) {
+
+                                if(avatar2.getShape().intersects(wall_1.getWallShape().getBoundsInParent())
+                                        || avatar2.getShape().intersects(wall_left_1.getWallShape().getBoundsInParent())
+                                        ||avatar2.getShape().intersects(wall_left_2.getWallShape().getBoundsInParent())
+                                        || avatar2.getShape().intersects(wall_right_1.getWallShape().getBoundsInParent())
+                                        ||avatar2.getShape().intersects(wall_right_2.getWallShape().getBoundsInParent())){
+
+                                    down_Wall=true;
+                                    avatar2.moveForward();
+                                    avatar2.moveForward();
+                                    avatar2.moveForward();
+                                    avatar2.moveForward();
+
+                                }else {
+                                    down_Wall=false;
+                                }
                                 avatar2.moveBackward();
 
                             }
-                            if(RIGHTpressed){
+                            if (RIGHTpressed) {
                                 avatar2.changeAngle(4);
                             }
 
@@ -195,14 +310,11 @@ public class HelloController implements Initializable {
                                 }
 
                             }
+                        }
 
-                            if(Fpressed){
-                                if(!shot_1_InProgress){
-                                    shotDraw_1();
-                                }else {
-                                    System.out.println("Disparo 1 en progreso");
-                                }
-                            }
+
+
+
 
 
 
@@ -224,26 +336,35 @@ public class HelloController implements Initializable {
 
                 avatar2.setShot();
                 avatar2.setDirectionsShot();
-                for(int i=0; i<30 && !shot_2_hit; i++){
+                boolean hitShot_2= false;
+                for(int i=0; i<30 && !hitShot_2; i++){
                     shot_2_InProgress=true;
                     avatar2.moveForwardShot();
                     avatar2.shot();
                     gc.restore();
 
+                    if(avatar2.getShotShape().intersects(avatar.getShape().getBoundsInParent())){
+                        hitShot_2=true;
+                        System.out.println("avatar 2 le dio al 1");
 
-                    if(avatar2.getShotPosition_X()+10==avatar.getTankPosition_X() && avatar2.getShotPosition_Y()+20== avatar.getTankPosition_Y()){
-                        System.out.println("Le dio");
-                        shot_2_hit=true;
+                        avatar.drawShotTank();
+                        avatar.drawShotTank();
+
+                        avatar.setLife();
+
+
                     }
 
+
+
                     try {
-                        Thread.sleep(70);
+                        Thread.sleep(30);
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
                 }
                 shot_2_InProgress=false;
-                shot_2_hit=false;
+
 
                 avatar2.setShot();
 
@@ -256,55 +377,40 @@ public class HelloController implements Initializable {
 
             avatar.setShot();
             avatar.setDirectionsShot();
-            for(int i=0; i<30 && !shot_1_hit; i++){
+
+            boolean hitShot_1= false;
+            boolean shotWall= false;
+
+            for(int i=0; i<30 && !hitShot_1 && !shotWall; i++){
                 shot_1_InProgress=true;
                 avatar.moveForwardShot();
                 avatar.shot();
                 gc.restore();
 
-                    if((avatar.getTankPosition_X()>=avatar2.getTankPosition_X() && avatar.getTankPosition_Y()<avatar2.getTankPosition_Y())
-                    || (avatar.getTankPosition_X()>=avatar2.getTankPosition_X() && avatar.getTankPosition_Y()>avatar2.getTankPosition_Y())
-                    || (avatar.getTankPosition_X())>avatar2.getTankPosition_X() && avatar.getTankPosition_Y()>=avatar2.getTankPosition_Y()){
-                        if(avatar.getShotPosition_X()+10<=avatar2.getTankPosition_X() && avatar.getShotPosition_Y()+10<= avatar2.getTankPosition_Y()
-                        ||avatar.getShotPosition_X()+10<=avatar2.getTankPosition_X()+15 && avatar.getShotPosition_Y()+10<= avatar2.getTankPosition_Y()+15
-                                ||avatar.getShotPosition_X()+10<=avatar2.getTankPosition_X()+20 && avatar.getShotPosition_Y()+10<= avatar2.getTankPosition_Y()+20){
-                            System.out.println("Le diooo mayor mayorrr");
-                            shot_1_hit=true;
-                        }
-                    }
+                if(avatar.getShotShape().intersects(avatar2.getShape().getBoundsInParent())){
+                    hitShot_1=true;
+                    System.out.println("avatar 1 le dio al 2");
 
-                if((avatar.getTankPosition_X()<=avatar2.getTankPosition_X() && avatar.getTankPosition_Y()<avatar2.getTankPosition_Y())
-                        || (avatar.getTankPosition_X()<=avatar2.getTankPosition_X() && avatar.getTankPosition_Y()>avatar2.getTankPosition_Y())
-                        || (avatar.getTankPosition_X())<avatar2.getTankPosition_X() && avatar.getTankPosition_Y()>=avatar2.getTankPosition_Y()){
+                    avatar2.drawShotTank();
+                    avatar2.drawShotTank();
 
-                    if(avatar.getTankPosition_X()>=avatar2.getTankPosition_X()&&avatar.getTankPosition_Y()>avatar2.getTankPosition_Y()){
+                    avatar2.setLife();
+                }
 
-                    }else {
-                        if(avatar.getShotPosition_X()-5>=avatar2.getTankPosition_X() && avatar.getShotPosition_Y()>= avatar2.getTankPosition_Y()
-                                ||avatar.getShotPosition_X()-5>=avatar2.getTankPosition_X()-15 && avatar.getShotPosition_Y()>= avatar2.getTankPosition_Y()-15
-                                ||avatar.getShotPosition_X()-5>=avatar2.getTankPosition_X()-20 && avatar.getShotPosition_Y()>= avatar2.getTankPosition_Y()-20
-                        ){
-                            System.out.println("Le diooo menor menor");
-                            shot_1_hit=true;
-                        }
-                    }
-
+                if(avatar.getShotShape().intersects(wall_1.getWallShape().getBoundsInParent())){
+                    shotWall=true;
                 }
 
 
 
-
-
-
-
                 try {
-                    Thread.sleep(70);
+                    Thread.sleep(30);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
             }
             shot_1_InProgress=false;
-            shot_1_hit=false;
+
 
             avatar.setShot();
 

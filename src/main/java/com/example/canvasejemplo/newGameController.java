@@ -1,5 +1,7 @@
 package com.example.canvasejemplo;
 
+import com.example.canvasejemplo.model.User;
+import com.example.canvasejemplo.model.Users;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -34,6 +36,12 @@ public class newGameController implements Initializable {
     public void onNewGameClick (){
 
         Stage stage = (Stage) newBttn.getScene().getWindow();
+
+        Users users=Users.getInstance();
+
+        users.setJP1(jp1.getText());
+        users.setJP2(jp2.getText());
+
         HelloApplication.showWindow("hello-view.fxml");
         stage.close();
     }
@@ -42,7 +50,8 @@ public class newGameController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        Image i = new Image(new File("D:\\Escritorio\\dektl6b-3b40000d-d04a-4d92-b767-17b70b19fb22.gif").toURI().toString());
+        String uri = "file:"+HelloApplication.class.getResource("fondo2.gif").getPath();
+        Image i = new Image((uri));
         fondo.setImage(i);
 
         newBttn.setStyle("-fx-padding: 8 15 15 15;\n" +
