@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 
@@ -35,15 +36,18 @@ public class newGameController implements Initializable {
     @FXML
     public void onNewGameClick (){
 
-        Stage stage = (Stage) newBttn.getScene().getWindow();
+        if(!Objects.equals(jp1.getText(), "") && jp1.getText()!=null && !Objects.equals(jp2.getText(), "") &&  jp2.getText()!=null && !Objects.equals(jp2.getText(), jp1.getText())  ) {
 
-        Users users=Users.getInstance();
+            Stage stage = (Stage) newBttn.getScene().getWindow();
 
-        users.setJP1(jp1.getText());
-        users.setJP2(jp2.getText());
+            Users users = Users.getInstance();
 
-        HelloApplication.showWindow("hello-view.fxml");
-        stage.close();
+            users.setJP1(jp1.getText());
+            users.setJP2(jp2.getText());
+
+            HelloApplication.showWindow("hello-view.fxml");
+            stage.close();
+        }
     }
 
 

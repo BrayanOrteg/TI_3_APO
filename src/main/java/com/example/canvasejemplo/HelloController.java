@@ -264,11 +264,18 @@ public class HelloController implements Initializable {
                                 count++;
 
                                 if (count==10){
-                                if(avatarCPU.getRadar().intersects(avatar.getShape().getBoundsInParent()) && !shot_CPU_InProgress ){
-                                    shotDraw_CPU();
-                                }else {
-                                    System.out.println("CPU DISPARO EN PROGRESO");
-                                }
+                                    avatarCPU.setShot();
+                                    avatarCPU.setDirectionsShot();
+                                    for (int i=0; i<30; i++){
+                                        avatarCPU.moveForwardShot();
+
+                                        if(avatarCPU.getRadar().intersects(avatar.getShape().getBoundsInParent())
+                                        ||avatarCPU.getRadar().intersects(avatar2.getShape().getBoundsInParent())){
+
+                                            i=30;
+                                            if(!shot_CPU_InProgress) shotDraw_CPU();
+                                        }
+                                    }
                                 }
 
                                 if (count == 12) {
@@ -428,29 +435,7 @@ public class HelloController implements Initializable {
                                 if (Apressed) {
                                     avatar.changeAngle(-4);
                                 }
-                                if (Spressed && avatar.getTankPosition_Y() +30 - avatar.getDirection().y <= canvas.getHeight() && avatar.getTankPosition_Y() - 30 - avatar.getDirection().y >= 0
-                                        && avatar.getTankPosition_X() +30 - avatar.getDirection().x <= canvas.getWidth() && avatar.getTankPosition_X() - 30 - avatar.getDirection().x >= 0
-                                && !w_Wall && !s_Wall) {
 
-                                    if(avatar.getShape().intersects(wall_1.getWallShape().getBoundsInParent())
-                                            || avatar.getShape().intersects(wall_left_1.getWallShape().getBoundsInParent())
-                                            ||avatar.getShape().intersects(wall_left_2.getWallShape().getBoundsInParent())
-                                            || avatar.getShape().intersects(wall_right_1.getWallShape().getBoundsInParent())
-                                            ||avatar.getShape().intersects(wall_right_2.getWallShape().getBoundsInParent())){
-
-                                        s_Wall=true;
-                                        avatar.moveForward();
-                                        avatar.moveForward();
-                                        avatar.moveForward();
-                                        avatar.moveForward();
-
-                                    }else {
-                                        s_Wall=false;
-                                    }
-
-                                        avatar.moveBackward();
-
-                                }
                                 if (Dpressed) {
                                     avatar.changeAngle(4);
                                 }
@@ -489,28 +474,7 @@ public class HelloController implements Initializable {
                             if (LEFTpressed) {
                                 avatar2.changeAngle(-4);
                             }
-                            if (DOWNpressed && avatar2.getTankPosition_Y() + 30 - avatar2.getDirection().y <= canvas.getHeight() && avatar2.getTankPosition_Y() - 30 - avatar2.getDirection().y >= 0
-                                    && avatar2.getTankPosition_X() + 30 - avatar2.getDirection().x <= canvas.getWidth() && avatar2.getTankPosition_X() - 30 - avatar2.getDirection().x >= 0
-                            && !up_Wall && !down_Wall) {
 
-                                if(avatar2.getShape().intersects(wall_1.getWallShape().getBoundsInParent())
-                                        || avatar2.getShape().intersects(wall_left_1.getWallShape().getBoundsInParent())
-                                        ||avatar2.getShape().intersects(wall_left_2.getWallShape().getBoundsInParent())
-                                        || avatar2.getShape().intersects(wall_right_1.getWallShape().getBoundsInParent())
-                                        ||avatar2.getShape().intersects(wall_right_2.getWallShape().getBoundsInParent())){
-
-                                    down_Wall=true;
-                                    avatar2.moveForward();
-                                    avatar2.moveForward();
-                                    avatar2.moveForward();
-                                    avatar2.moveForward();
-
-                                }else {
-                                    down_Wall=false;
-                                }
-                                avatar2.moveBackward();
-
-                            }
                             if (RIGHTpressed) {
                                 avatar2.changeAngle(4);
                             }

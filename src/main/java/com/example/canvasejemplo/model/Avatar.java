@@ -36,15 +36,12 @@ public class Avatar extends Thread {
         tank = new Image(uri);
 
         pos = new Vector(positionX,positionY);
-
-        shape=new Rectangle(100,100,48,48);
-
-        shapeShot=new Rectangle(100,100, 10, 10);
-
         posShot = new Vector(100,100);
         direction = new Vector(2,2);
 
-        radar= new Rectangle (100,100,1800,40);
+        shape=new Rectangle(100,100,48,48);
+        shapeShot=new Rectangle(100,100, 10, 10);
+        radar= new Rectangle (100,100,20,20);
 
         this.user=user;
     }
@@ -56,13 +53,9 @@ public class Avatar extends Thread {
         shape.setX(pos.x-25);
         shape.setY(pos.y-20);
 
-        radar.setRotate(90+direction.getAngle());
-
-
         gc.drawImage(tank, -25,-25, 50,50);
 
         gc.restore();
-
     }
 
     public void drawShotTank(){
@@ -91,21 +84,14 @@ public class Avatar extends Thread {
     public void moveForward(){
         pos.x += direction.x;
         pos.y += direction.y;
-
-        radar.setX(pos.x);
-        radar.setY(pos.y);
     }
 
     public void moveBackward(){
         pos.x -= direction.x;
         pos.y -= direction.y;
-
-        radar.setX(pos.x);
-        radar.setY(pos.y);
     }
 
     public void shot(){
-
         gc.setFill(Color.WHITE);
         gc.fillOval(posShot.x, posShot.y, 10,10);
         gc.restore();
@@ -116,11 +102,9 @@ public class Avatar extends Thread {
         posShot.y = pos.y;
     }
 
-
     public void setDirectionsShot(){
-
         auxiliar_X= direction.x * 2;
-        auxiliar_Y=direction.y * 2;
+        auxiliar_Y= direction.y * 2;
     }
 
     public void moveForwardShot(){
@@ -129,6 +113,9 @@ public class Avatar extends Thread {
 
         shapeShot.setX(posShot.x);
         shapeShot.setY(posShot.y);
+
+        radar.setX(posShot.x);
+        radar.setY(posShot.y);
     }
 
     public double getShotPosition_X(){
