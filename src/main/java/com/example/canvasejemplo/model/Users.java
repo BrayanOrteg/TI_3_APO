@@ -15,7 +15,7 @@ public class Users {
 
     private String jp1;
     private String jp2;
-    private String jp3="CPU";
+    private String winner;
 
     public void addUser(){
 
@@ -127,6 +127,14 @@ public class Users {
     public String getJP2(){
         return jp2;
     }
+
+    public void setWinner (String name){winner=name;}
+
+    public String getWinner(){
+        return winner;
+    }
+
+
 
 
 

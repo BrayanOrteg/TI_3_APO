@@ -15,9 +15,9 @@ public class Walls {
    private Image wall;
    private Rectangle wallShape;
 
-   private int positionX, positionY, height, weight;
+   private int positionX, positionY, height, weight, life=3;
 
-   public Walls(Canvas canvas, int positionX , int positionY, int height, int weight) {
+   public Walls(Canvas canvas, int positionX , int positionY, int weight, int height) {
       this.canvas = canvas;
       this.positionX=positionX;
       this.positionY=positionY;
@@ -30,7 +30,7 @@ public class Walls {
       wall= new Image(path);
 
 
-      wallShape= new Rectangle(positionX,positionY,height,weight);
+      wallShape= new Rectangle(positionX,positionY,weight,height);
 
 
 
@@ -39,12 +39,36 @@ public class Walls {
 
    public void drawWall(){
       gc.save();
-
-      gc.drawImage(wall,positionX,positionY,height+10,weight+10);
+      gc.drawImage(wall,positionX,positionY,weight+10,height+10);
       gc.restore();
    }
 
    public Rectangle getWallShape() {
       return wallShape;
+   }
+
+   public int getPositionX() {
+      return positionX;
+   }
+
+   public void setPositionX(int positionX) {
+      this.positionX = positionX;
+      wallShape.setX(positionX);
+   }
+
+   public int getPositionY() {
+      return positionY;
+   }
+
+   public void setPositionY(int positionY) {
+      this.positionY = positionY;
+   }
+
+   public int getLife() {
+      return life;
+   }
+
+   public void setLife() {
+      life--;
    }
 }

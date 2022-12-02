@@ -24,16 +24,13 @@ public class MenuController implements Initializable {
 
     @FXML
     public void onScoreClick (){
-
         Stage stage = (Stage) bttn1.getScene().getWindow();
         HelloApplication.showWindow("score.fxml");
         stage.close();
-
     }
 
     @FXML
     public void onGameClick (){
-
         Stage stage = (Stage) bttn1.getScene().getWindow();
         HelloApplication.showWindow("newGame.fxml");
         stage.close();

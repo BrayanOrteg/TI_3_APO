@@ -1,10 +1,125 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.canvas.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="487.0" prefWidth="710.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.canvasejemplo.HelloController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="587.0" prefWidth="710.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.canvasejemplo.HelloController">
    <children>
-      <Canvas fx:id="canvas" height="487.0" width="717.0" />
+      <Canvas fx:id="canvas" height="487.0" layoutX="-3.0" layoutY="-27.0" width="717.0" />
+      <HBox layoutY="547.0" prefHeight="40.0" prefWidth="193.0">
+         <children>
+            <ImageView fx:id="heart_1_1" fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@heart.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="heart_1_2" fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@heart.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="heart_1_3" fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@heart.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="heart_1_4" fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@heart.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="heart_1_5" fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@heart.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
+      <HBox layoutX="259.0" layoutY="549.0" prefHeight="40.0" prefWidth="193.0">
+         <children>
+            <ImageView fx:id="heart_2_1" fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@heart.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="heart_2_2" fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@heart.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="heart_2_3" fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@heart.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="heart_2_4" fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@heart.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="heart_2_5" fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@heart.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
+      <HBox layoutX="520.0" layoutY="550.0" prefHeight="38.0" prefWidth="266.0">
+         <children>
+            <ImageView fx:id="heart_3_1" fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@heart.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="heart_3_2" fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@heart.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="heart_3_3" fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@heart.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="heart_3_4" fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@heart.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="heart_3_5" fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@heart.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
+      <ImageView fx:id="image_bullet1" fitHeight="40.0" fitWidth="56.0" layoutX="-4.0" layoutY="495.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@bullet_2.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="image_bullet2" fitHeight="40.0" fitWidth="56.0" layoutX="518.0" layoutY="497.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@bullet_2.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="player_1_name" layoutX="28.0" layoutY="471.0" prefHeight="29.0" prefWidth="102.0" text="label">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="290.0" layoutY="475.0" prefHeight="17.0" prefWidth="79.0" text="CPU">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="player_2_name" layoutX="554.0" layoutY="477.0" prefHeight="27.0" prefWidth="102.0" text="Label">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

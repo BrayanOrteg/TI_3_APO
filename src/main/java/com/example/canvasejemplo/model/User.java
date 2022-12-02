@@ -22,7 +22,7 @@ public class User {
         return wins;
     }
 
-    public void setWins(int wins) {
-        this.wins = wins;
+    public void updateWins() {
+        wins++;
     }
 }

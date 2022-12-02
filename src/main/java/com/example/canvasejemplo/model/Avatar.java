@@ -21,19 +21,20 @@ public class Avatar extends Thread {
 
     private double auxiliar_X=0,auxiliar_Y=0;
 
-    private Rectangle shape , shapeShot;
+    private Rectangle shape , shapeShot, radar;
 
+    private String user;
 
+    public int life=5;
 
-    public int life=4;
-
-    public Avatar(Canvas canvas, int positionX, int positionY){
+    public Avatar(Canvas canvas, int positionX, int positionY, String imagePath, String user){
         this.canvas = canvas;
 
         gc = canvas.getGraphicsContext2D();
 
-        String uri = "file:"+HelloApplication.class.getResource("tank.png").getPath();
+        String uri = "file:"+HelloApplication.class.getResource(imagePath).getPath();
         tank = new Image(uri);
+
         pos = new Vector(positionX,positionY);
 
         shape=new Rectangle(100,100,48,48);
@@ -42,6 +43,10 @@ public class Avatar extends Thread {
 
         posShot = new Vector(100,100);
         direction = new Vector(2,2);
+
+        radar= new Rectangle (100,100,1800,40);
+
+        this.user=user;
     }
 
     public void draw(){
@@ -51,10 +56,13 @@ public class Avatar extends Thread {
         shape.setX(pos.x-25);
         shape.setY(pos.y-20);
 
+        radar.setRotate(90+direction.getAngle());
+
+
         gc.drawImage(tank, -25,-25, 50,50);
 
-
         gc.restore();
+
     }
 
     public void drawShotTank(){
@@ -64,11 +72,9 @@ public class Avatar extends Thread {
         gc.fillRect(-25,-25,50,50);
         gc.setFill(Color.WHITE);
 
-
         gc.restore();
-
-
     }
+
     public void setPosition(double x, double y) {
         pos.x = (int) x - 25;
         pos.y = (int) y - 25;
@@ -85,21 +91,26 @@ public class Avatar extends Thread {
     public void moveForward(){
         pos.x += direction.x;
         pos.y += direction.y;
+
+        radar.setX(pos.x);
+        radar.setY(pos.y);
     }
 
     public void moveBackward(){
         pos.x -= direction.x;
         pos.y -= direction.y;
+
+        radar.setX(pos.x);
+        radar.setY(pos.y);
     }
 
     public void shot(){
 
-            gc.setFill(Color.WHITE);
-            gc.fillOval(posShot.x, posShot.y, 10,10);
-            gc.restore();
-
-
+        gc.setFill(Color.WHITE);
+        gc.fillOval(posShot.x, posShot.y, 10,10);
+        gc.restore();
     }
+
     public void setShot(){
         posShot.x = pos.x;
         posShot.y = pos.y;
@@ -118,7 +129,6 @@ public class Avatar extends Thread {
 
         shapeShot.setX(posShot.x);
         shapeShot.setY(posShot.y);
-
     }
 
     public double getShotPosition_X(){
@@ -153,6 +163,13 @@ public class Avatar extends Thread {
 
     public Vector getDirection() {
         return direction;
+    }
+
+    public String getUser(){return user;}
+
+
+    public Rectangle getRadar() {
+        return radar;
     }
 }
 

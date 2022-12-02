@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="270.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.canvasejemplo.VictoryController">
+    <children>
+        <ImageView fx:id="fondo" fitHeight="270.0" fitWidth="480.0" pickOnBounds="true" preserveRatio="true" />
+        <Button fx:id="bttn" layoutX="200.0" layoutY="199.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="97.0" text="Continuar" textFill="WHITE" onAction="#onContinueClick" />
+        <ImageView fx:id="victory" fitHeight="82.0" fitWidth="268.0" layoutX="115.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true" />
+        <Label fx:id="label" alignment="CENTER" layoutX="50.0" layoutY="146.0" prefHeight="18.0" prefWidth="398.0" text="Label" textAlignment="CENTER" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="16.0" />
+            </font></Label>
+    </children>
+</AnchorPane>

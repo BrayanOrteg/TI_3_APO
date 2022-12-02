@@ -1,1 +1,1 @@
-[{"name":"hi","wins":2},{"name":"bo","wins":3},{"name":"hehe","wins":0},{"name":"ELBICHOOO","wins":0},{"name":"ggggg","wins":0},{"name":"ELBICHOO0","wins":0},{"name":"","wins":0}]
+[{"name":"CR7","wins":4},{"name":"bo","wins":3},{"name":"","wins":3},{"name":"hi","wins":2},{"name":"Sapa","wins":0},{"name":"fdsf","wins":0},{"name":"f","wins":0},{"name":"eeeee","wins":0},{"name":"ELBICHOO0","wins":0},{"name":"ggggg","wins":0},{"name":"ELBICHOOO","wins":0},{"name":"hehe","wins":0}]

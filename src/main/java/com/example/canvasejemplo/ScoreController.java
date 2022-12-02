@@ -18,9 +18,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.net.URL;
-import java.util.ResourceBundle;
-
-
+import java.util.*;
 
 
 public class ScoreController implements Initializable {
@@ -71,13 +69,16 @@ public class ScoreController implements Initializable {
                 "    -fx-font-weight: bold;\n" +
                 "    -fx-font-size: 1.1em;");
 
-        people= FXCollections.observableArrayList();
 
         nameCol.setCellValueFactory(new PropertyValueFactory<User,String>("name"));
         winCol.setCellValueFactory(new PropertyValueFactory<User,Integer>("wins"));
 
-        people.addAll(Users.getInstance().getList());
+        ArrayList<User> users=Users.getInstance().getList();
 
-        table.setItems(people);
+        users.sort(Comparator.comparing(User::getWins));
+
+        FXCollections.reverse(FXCollections.observableList(users));
+
+        table.setItems(FXCollections.observableList(users));
     }
 }
